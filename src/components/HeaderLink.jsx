@@ -10,6 +10,9 @@ function HeaderLink() {
           <p>
             <Link to="/login">TodoList with MobX</Link>
           </p>
+          <p>
+            <Link to="/redux">TodoList with Redux</Link>
+          </p>
           </div>
     );
 }
