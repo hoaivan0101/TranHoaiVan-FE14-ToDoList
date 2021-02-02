@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   BrowserRouter,
   Link, Route, Switch
 } from "react-router-dom";
-import { deleteTask, editTask, addTask } from '../action/task';
+import { addTask, fetchTask } from '../action/task';
+import { getApi } from '../apis/todoApi';
 import HeaderLink from '../components/HeaderLink';
 import Newtask from '../components/NewTask.jsx';
 import star from '../components/pngwing.com.png';
@@ -12,20 +13,40 @@ import Task from '../components/Task.jsx';
 
 function ReduxPage(props) {
 
-  const task = useSelector(state => state.task);
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    getApi('task', 'GET').then(res => {
+      dispatch(fetchTask(res.data))
+    })
+  }, []);
+
+  const task = useSelector(state => state.task);
+
   const getdata = (data, key, statusValue) => {
-    if (!data && task[key].status === statusValue) { return false };
-    dispatch(editTask({ data: data, key: key, statusValue: statusValue }));
+    if (data == '') { data = task[key - 1].name };
+    getApi('task/' + key, 'PUT', { name:data,status:statusValue})
+    .then(res => {
+      getApi('task', 'GET').then(data => {
+        dispatch(fetchTask(data.data))
+      })
+    });
   }
     
   const addfn = (value) => {
-    dispatch(addTask(value));
+    getApi('task', 'POST', { name: value, status: 'ToDo' }).then(res => {
+      dispatch(addTask(value));
+    });
   }
     
   const deletefn = (value) => {
-    dispatch(deleteTask(value));
+    getApi('task/' + value, 'DELETE', null)
+      .then(res => {
+        getApi('task', 'GET').then(data => {
+          dispatch(fetchTask(data.data))
+        })
+      });
+
   }
 
     return (
@@ -69,6 +90,7 @@ function ReduxPage(props) {
             * This page is written with redux *
             </i>
           </p>
+          <p style={{fontSize: '14px'}}><b><i>*Data fetched by json-server with data.json file and port:3000* </i></b></p>
             </header>
         </div>
     );

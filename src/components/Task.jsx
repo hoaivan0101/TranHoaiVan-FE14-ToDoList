@@ -42,7 +42,7 @@ class Todo extends React.Component {
             <Inputtext
               saveClick={this.saveClick}
               value={this.props.name}
-              index={this.props.index} /> :
+              index={this.props.id} /> :
               <ShowMoreText
               lines={1}
               more='Show more'
@@ -55,7 +55,7 @@ class Todo extends React.Component {
           }</h3>
         </div>
         <div className="flex-center deleteX">
-          <p onClick={()=>this.props.deletefn(this.props.index)}>X</p>
+          <p onClick={()=>this.props.deletefn(this.props.id)}>X</p>
         </div>
         <div className="flex-center">
           {this.state.isEditing ?

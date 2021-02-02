@@ -26,3 +26,10 @@ export const addTask = (task) => {
         payload: task
     }
 }
+
+export const fetchTask = (task) => { 
+    return {
+        type: 'FETCH_TASK',
+        payload: task
+    }
+}

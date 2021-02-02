@@ -1,30 +1,43 @@
-const initialState = [
-    {
-      'name': 'GAME',
-      'content': 'Call of Duty',
-      'status':'Finished'
-    },
-    {
-      'name': 'SOCCER',
-      'content': 'Manchester United',
-      'status':'ToDo'
-    },
-    {
-      'name': 'COMIC',
-      'content': 'OnePiece',
-      'status':'Cancel'
-    },
-    {
-      'name': 'HELLO DARKNESS MY OLD FRIEND',
-      'content': 'Attack on Titan',
-      'status':'Finished'
-    }
-  ]
+import {getApi} from '../apis/todoApi'
 
-const taskReducer = (state=initialState, action) => {
-    switch (action.type) {
+let initialState = []
+
+
+// const initialState = [
+//     {
+//       'name': 'GAME',
+//       'content': 'Call of Duty',
+//       'status':'Finished'
+//     },
+//     {
+//       'name': 'SOCCER',
+//       'content': 'Manchester United',
+//       'status':'ToDo'
+//     },
+//     {
+//       'name': 'COMIC',
+//       'content': 'OnePiece',
+//       'status':'Cancel'
+//     },
+//     {
+//       'name': 'HELLO DARKNESS MY OLD FRIEND',
+//       'content': 'Attack on Titan',
+//       'status':'Finished'
+//     }
+// ]
+  
+
+const taskReducer = (state = initialState, action) => {
+
+  switch (action.type) {
+      
+    case 'FETCH_TASK': {
+        return action.payload
+    }
+      
       case 'ADD_TASK': {
-        const newState = [...state];
+      let newState = [...state];
+     
         newState.push({ name: action.payload, status: 'ToDo' });
         return newState;
       }
