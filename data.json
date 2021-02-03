@@ -1,13 +1,8 @@
 {
   "task": [
     {
-      "name": "GAME",
-      "status": "ToDo",
-      "id": 1
-    },
-    {
-      "name": "adsfasdf",
-      "status": "ToDo",
+      "name": "dfasdfasfd",
+      "status": "Finished",
       "id": 2
     },
     {
@@ -16,9 +11,9 @@
       "id": 3
     },
     {
-      "name": "12313123",
+      "name": "Reactjs with redux and redux-saga",
       "status": "ToDo",
-      "id": 4
+      "id": 6
     }
   ]
 }
